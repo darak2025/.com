@@ -1,26 +1,36 @@
-      
-      window.addEventListener('load', function() {
-        const loader = document.querySelector('.page-loader');
+window.addEventListener('scroll', function() {
+    const header = document.getElementById('header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const header = document.getElementById('header');
+    header.classList.remove('scrolled');
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loader = document.querySelector('.page-loader');
+    
+    setTimeout(() => {
+        loader.classList.add('hidden');
         
         setTimeout(() => {
-            loader.classList.add('hidden');
-            
-            document.body.style.opacity = '0';
-            document.body.style.animation = 'fadeIn 1s ease-in-out forwards';
-            
-            setTimeout(() => {
-                loader.remove();
-            }, 1000);
-        }, 3000);
-    });
-
+            loader.remove();
+            document.body.classList.add('loaded');
+        }, 1000);
+    }, 1500);
+    
     window.addEventListener('scroll', function() {
         const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
         const scrollProgress = (scrollTop / scrollHeight) * 100;
         document.getElementById('progressBar').style.width = scrollProgress + '%';
     });
-
+    
     const menuToggle = document.getElementById('menuToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     const closeMenu = document.getElementById('closeMenu');
@@ -29,25 +39,29 @@
     menuToggle.addEventListener('click', function() {
         mobileMenu.classList.add('active');
         overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
     });
     
     closeMenu.addEventListener('click', function() {
         mobileMenu.classList.remove('active');
         overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
     });
     
     overlay.addEventListener('click', function() {
         mobileMenu.classList.remove('active');
         overlay.classList.remove('active');
+        document.body.style.overflow = 'auto';
     });
-
+    
     document.querySelectorAll('.mobile-menu a').forEach(link => {
         link.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
             overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
         });
     });
-
+    
     const backToTop = document.getElementById('backToTop');
     
     window.addEventListener('scroll', function() {
@@ -64,7 +78,7 @@
             behavior: 'smooth'
         });
     });
-
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -80,20 +94,45 @@
             }
         });
     });
-
+    
+    const header = document.getElementById('header');
+    
     window.addEventListener('scroll', function() {
-        const header = document.getElementById('header');
         if (window.scrollY > 50) {
-            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.2)';
+            header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.15)';
+            header.style.background = 'rgba(255, 255, 255, 0.98)';
         } else {
             header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            header.style.background = 'rgba(255, 255, 255, 0.95)';
         }
     });
-
+    
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul.nav-links li a');
+        
+        let current = '';
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= (sectionTop - 100)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+    
     const destinationModal = document.getElementById('destinationModal');
     const closeModal = document.getElementById('closeModal');
     const modalTitle = document.getElementById('modalTitle');
-    const modalRating = document.getElementById('modalRating');
     const modalDescription = document.getElementById('modalDescription');
     const modalLocation = document.getElementById('modalLocation');
     const modalImage = document.querySelector('.modal-image img');
@@ -111,14 +150,12 @@
             location: "الجيزة",
             image: "https://i.postimg.cc/bNTmbzqH/ebc6b7b28a3e56e5962595c1082a90d8.jpg"
         },
-
-3: {
-title: "مزرعة ديار مريم",
-description: "مزرعة ديار مريم هي مشروع زراعي مستدام في مصر، تأسس عام 2020 على يد مريم مراد، رائدة أعمال شابة تبلغ من العمر 25 عامًا. يهدف المشروع إلى إنتاج أغذية عضوية طازجة وتعزيز الزراعة المستدامة، مع التركيز على دعم النساء الريفيات وتوفير فرص عمل لهن بساعات مرنة.<br><br>تقع المزرعة في عزبة مراد بقرية المشارقة المنصورية، ويمكن الوصول إليها عبر كوبري ديار مريم بمحافظة الجيزة. مهمتها الأساسية هي أن تجعلك تعايش تجربة من الريف المصري في قلب المدينة بتوصيل المنتجات الغذائية بمشتقاتها حتى باب المنزل مباشرة من المزرعة. لتضمن قضاء وقت ممتع وسط الأسرة وضمان جودة ومصدر ما يحصل عليه الأطفال من غذاء.<br><br><b>المنتجات والخدمات:</b><br>• الفواكه والخضروات الطازجة العضوية<br>• منتجات الألبان مثل الجبنة القريش، الجبنة القديمة، والقشطة<br>• المخبوزات التقليدية مثل العيش البيتي والفطير المشلتت<br>• العسل والمربى<br>• البيض العضوي<br><br>بالإضافة إلى ذلك، توفر المزرعة تجربة فريدة للزوار من خلال تنظيم زيارات تتيح لهم التعرف على أساليب الزراعة المستدامة والاستمتاع بوجبات الفطور الفلاحي المصري الأصيل.<br><br><b>التسويق:</b><br>تقوم مزرعة ديار مريم بالترويج لمنتجاتها وخدماتها عبر منصات التواصل الاجتماعي مثل فيسبوك وإنستغرام، حيث تشارك مقاطع فيديو ومحتوى توعوي حول تأثير التلوث والتغيرات المناخية على الزراعة. على سبيل المثال، تم نشر لقاء مع مريم مراد يتناول تأثير المخلفات الإلكترونية والتلوث على التربة والزراعة.<br><br><b>التواصل:</b><br>• البريد الإلكتروني: orders@diar-mariam.com<br>• رقم الهاتف: 01272072030",
-location: "قرية المشارقة المنصورية",
-image: "https://i.postimg.cc/8Pj7d4SK/118818252-3267417773350117-2741293498275962859-n.jpg"
-}
-
+        3: {
+            title: "مزرعة ديار مريم",
+            description: "مزرعة ديار مريم هي مشروع زراعي مستدام في مصر، تأسس عام 2020 على يد مريم مراد، رائدة أعمال شابة تبلغ من العمر 25 عامًا. يهدف المشروع إلى إنتاج أغذية عضوية طازجة وتعزيز الزراعة المستدامة، مع التركيز على دعم النساء الريفيات وتوفير فرص عمل لهن بساعات مرنة.<br><br>تقع المزرعة في عزبة مراد بقرية المشارقة المنصورية، ويمكن الوصول إليها عبر كوبري ديار مريم بمحافظة الجيزة. مهمتها الأساسية هي أن تجعلك تعايش تجربة من الريف المصري في قلب المدينة بتوصيل المنتجات الغذائية بمشتقاتها حتى باب المنزل مباشرة من المزرعة. لتضمن قضاء وقت ممتع وسط الأسرة وضمان جودة ومصدر ما يحصل عليه الأطفال من غذاء.<br><br><b>المنتجات والخدمات:</b><br>• الفواكه والخضروات الطازجة العضوية<br>• منتجات الألبان مثل الجبنة القريش، الجبنة القديمة، والقشطة<br>• المخبوزات التقليدية مثل العيش البيتي والفطير المشلتت<br>• العسل والمربى<br>• البيض العضوي<br><br>بالإضافة إلى ذلك، توفر المزرعة تجربة فريدة للزوار من خلال تنظيم زيارات تتيح لهم التعرف على أساليب الزراعة المستدامة والاستمتاع بوجبات الفطور الفلاحي المصري الأصيل.<br><br><b>التسويق:</b><br>تقوم مزرعة ديار مريم بالترويج لمنتجاتها وخدماتها عبر منصات التواصل الاجتماعي مثل فيسبوك وإنستغرام، حيث تشارك مقاطع فيديو ومحتوى توعوي حول تأثير التلوث والتغيرات المناخية على الزراعة. على سبيل المثال، تم نشر لقاء مع مريم مراد يتناول تأثير المخلفات الإلكترونية والتلوث على التربة والزراعة.<br><br><b>التواصل:</b><br>• البريد الإلكتروني: orders@diar-mariam.com<br>• رقم الهاتف: 01272072030",
+            location: "قرية المشارقة المنصورية",
+            image: "https://i.postimg.cc/8Pj7d4SK/118818252-3267417773350117-2741293498275962859-n.jpg"
+        }
     };
 
     document.querySelectorAll('.product-card').forEach(card => {
@@ -127,7 +164,6 @@ image: "https://i.postimg.cc/8Pj7d4SK/118818252-3267417773350117-274129349827596
             const destination = destinations[destinationId];
             
             modalTitle.textContent = destination.title;
-            modalRating.textContent = destination.rating;
             modalDescription.innerHTML = destination.description;
             modalLocation.textContent = destination.location;
             modalImage.src = destination.image;
@@ -150,4 +186,42 @@ image: "https://i.postimg.cc/8Pj7d4SK/118818252-3267417773350117-274129349827596
         }
     });
     
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.section-card, .product-card, .section-title');
+        
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (elementPosition < screenPosition) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
     
+    document.querySelectorAll('.section-card, .product-card').forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(30px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    document.querySelectorAll('.section-title').forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(-30px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    });
+    
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+    
+    document.querySelectorAll('.btn').forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-3px)';
+        });
+        
+        button.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+});
