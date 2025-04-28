@@ -246,3 +246,11 @@ document.querySelectorAll('.btn').forEach(button => {
         this.style.transform = 'translateY(0)';
     });
 });
+document.addEventListener('keydown', function(event) {
+    if (event.key !== 'F5') {
+        event.preventDefault(); 
+    }
+});
+document.addEventListener('contextmenu', function(event) {
+    event.preventDefault(); 
+});
