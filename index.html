@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>دارَك - هدوء يروق بالك</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     
@@ -55,6 +57,7 @@
             <li><a href="#destinations">الأماكن الريفية</a></li>
         </ul>
         <button class="theme-toggle" id="mobileThemeToggle" aria-label="تبديل الوضع الداكن">
+            <i class="fas fa-moon"></i>
         </button>
     </div>
 
@@ -66,6 +69,13 @@
             <p>اكتشف جمال الريف المصري واستمتع بتجربة فريدة من الاسترخاء والطبيعة الخلابة مع دارَك</p>
             <a href="#about" class="btn">اعرف اكثر</a>
         </div>
+        
+        <!-- تأثيرات الطبيعة -->
+        <div class="nature-effect leaf" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+        <div class="nature-effect leaf" style="top: 70%; left: 15%; animation-delay: 2s;"></div>
+        <div class="nature-effect leaf" style="top: 40%; left: 85%; animation-delay: 4s;"></div>
+        <div class="nature-effect bird" style="top: 30%; left: 80%; animation-delay: 1s;"></div>
+        <div class="nature-effect bird" style="top: 60%; left: 5%; animation-delay: 3s;"></div>
     </section>
 
     <section class="campaign-goal" id="about">
@@ -80,6 +90,7 @@
                 </p>
             </div>
         </div>
+        <div class="agriculture-pattern"></div>
     </section>
     
 
@@ -92,6 +103,7 @@
                 <p>هدف الحملة هو إبراز جمال الريف المصري من خلال عرض الأماكن الريفية وما تقدمه من أنشطة وفعاليات مميزة عشان نقدر نقدملك تجربة متكاملة.</p>
             </div>
         </div>
+        <div class="agriculture-pattern"></div>
     </section>
 
     <section class="destinations" id="destinations">
@@ -186,16 +198,7 @@
                     </div>
                 </div>
                 
-                <div class="footer-column">
-                    <h3>الاقسام</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">الرئيسية</a></li>
-                        <li><a href="#about">من نحن</a></li>
-                        <li><a href="#goal">الهدف</a></li>
-                        <li><a href="#destinations">الأماكن الريفية</a></li>
-                    </ul>
-                </div>
-            </div>
+
             
             <div class="footer-bottom">
                 <p>&copy; 2025 دارَك - جميع الحقوق محفوظة</p>
@@ -207,7 +210,7 @@
     <button class="back-to-top" id="backToTop">
         <i class="fas fa-arrow-up"></i>
     </button>
-    <script src="script.js"></script>
 
+<script src="script.js"></script>
 </body>
 </html>
